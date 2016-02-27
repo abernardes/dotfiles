@@ -35,6 +35,7 @@ values."
      (ruby :variables ruby-version-manager 'rvm
                       ruby-test-running    'rspec)
      ruby-on-rails
+     elixir
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -252,6 +253,8 @@ layers configuration. You are free to put any user code."
   ;;
   ;; Keep line truncation off
   (spacemacs/toggle-truncate-lines-off)
+  (add-hook 'react-mode-hook 'emmet-mode)
+  (add-hook 'react-mode-hook 'smartparens-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
