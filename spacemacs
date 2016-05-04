@@ -32,10 +32,12 @@ values."
             shell-default-height 30
             shell-default-position 'bottom)
      version-control
-     (ruby :variables ruby-version-manager 'rvm
-                      ruby-test-running    'rspec)
+     (ruby :variables ruby-enable-enh-ruby-mode t
+                      ruby-version-manager      'rvm
+                      ruby-test-running         'rspec)
      ruby-on-rails
      elixir
+     osx
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -96,8 +98,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(spacemacs-light
+                         pacemacs-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -244,6 +246,7 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
+  (setq-default git-magit-status-fullscreen t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -264,12 +267,22 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(projectile-global-mode t)
  '(projectile-globally-ignored-directories
    (quote
-    (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "node_modules"))))
+    (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "node_modules" "_build")))
+ '(projectile-switch-project-action (quote helm-projectile))
+ '(rspec-command-options "")
+ '(rspec-spec-command "docker-compose run store rspec")
+ '(rspec-use-bundler-when-possible nil)
+ '(rspec-use-rvm t)
+ '(ruby-deep-arglist nil)
+ '(ruby-deep-indent-paren nil)
+ '(ruby-deep-indent-paren-style nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
