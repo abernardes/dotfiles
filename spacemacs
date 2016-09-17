@@ -25,18 +25,14 @@ values."
      ;; ----------------------------------------------------------------
      auto-completion
      emacs-lisp
-     javascript
-     react
      git
+     ruby-on-rails
+     (ruby :variables ruby-test-runner 'rspec)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      version-control
-     (ruby :variables ruby-enable-enh-ruby-mode t
-                      ruby-version-manager      'rvm
-                      ruby-test-running         'rspec)
-     ruby-on-rails
-     elixir
+     react
      osx
      )
    ;; List of additional packages that will be installed without being
@@ -99,7 +95,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-light
-                         pacemacs-dark)
+                         spacemacs-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -247,17 +243,19 @@ It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
   (setq-default git-magit-status-fullscreen t)
+  (setq haskell-process-type 'stack-ghci)
+  ;;
+  ;; Keep line truncation off
+  ;; (spacemacs/toggle-truncate-lines-off)
   )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-  ;;
-  ;; Keep line truncation off
-  (spacemacs/toggle-truncate-lines-off)
   (add-hook 'react-mode-hook 'emmet-mode)
   (add-hook 'react-mode-hook 'smartparens-mode)
+  (spacemacs/toggle-truncate-lines-off)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -267,13 +265,14 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(projectile-enable-caching t)
  '(projectile-global-mode t)
  '(projectile-globally-ignored-directories
    (quote
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "node_modules" "_build")))
  '(projectile-switch-project-action (quote helm-projectile))
  '(rspec-command-options "")
- '(rspec-spec-command "docker-compose run store rspec")
+ '(rspec-spec-command "rspec")
  '(rspec-use-bundler-when-possible nil)
  '(rspec-use-rvm t)
  '(ruby-deep-arglist nil)
